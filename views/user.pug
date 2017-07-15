@@ -1,0 +1,40 @@
+extends layout
+
+block content
+
+    h1 Welcome, #{username}!
+    a(href="/logout") Logout
+    a(href="/gab")
+    div(id='gababout')
+        form(action='/gab' method='POST' id='gabform' name='gabform')
+            label(for="gab") Got something to Gab about?:
+            br/
+            textarea(id='gabtext' name='gab' form='gabform' placeholder='Gab about it!')
+            input(type='submit' id='submit')
+            br/
+
+    div(id='gabs')
+        h2 Most recent Gabs:
+        ul
+            each gab in gabs
+                - const gabs = gab.gabs
+                - const author = gab.author
+                - const like = gab.like
+                li #{gabs} - @ #{author}
+                    p - #{like} likes this shit
+
+                    each user in username
+                        - const username = user
+
+                    form(action='/like' method='POST' id='gabform' name='like')
+                        input(name='like' value=gabs hidden=true)
+                        button(type='submit') Like &#x1F44D;
+
+                    if author === username
+                        form(action='/delete' method='POST' id='gabform' name='delete')
+                            input(name='delete' value=gabs hidden=true)
+                            button(type='submit') Delete Post &#x232B;
+                    else
+
+                    hr/
+                    br/

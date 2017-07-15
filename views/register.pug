@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    h2 register
+
+    form(action="/register", method="POST")
+        input(type="text", placeholder="username", name="username")
+        br/
+        input(type="password", placeholder="********", name="password")
+        br/
+        input(type="submit")
